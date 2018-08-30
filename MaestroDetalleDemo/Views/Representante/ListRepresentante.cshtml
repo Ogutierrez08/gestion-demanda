@@ -1,0 +1,64 @@
+﻿@model IEnumerable<MaestroDetalleDemo.Models.TB_REPRESENTANTE>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.COD_REPRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NOM_REPRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.APEPAT_REPRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.APEMAT_REPRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DNI_REPRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOMREAL_REPRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOMLEG_REPRE)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.COD_REPRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOM_REPRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.APEPAT_REPRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.APEMAT_REPRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DNI_REPRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DOMREAL_REPRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DOMLEG_REPRE)
+        </td>
+    </tr>
+}
+
+</table>
+
+<ul class="pagination">
+    <li>@Ajax.ActionLink("Primero", "ListRepresentante", new { id = 1 }, new AjaxOptions { UpdateTargetId = "list-Representante", InsertionMode = InsertionMode.Replace })</li>
+    <li>@Ajax.ActionLink("Anterior", "ListRepresentante", new { id = (ViewBag.PageIndex - 1 < 1) ? 1 : (ViewBag.PageIndex - 1) }, new AjaxOptions { UpdateTargetId = "list-Representante", InsertionMode = InsertionMode.Replace })</li>
+    <li><span>Pág. @ViewBag.PageIndex de @ViewBag.PageCount</span></li>
+    <li>@Ajax.ActionLink("Siguiente", "ListRepresentante", new { id = (ViewBag.PageIndex + 1 > ViewBag.PageCount) ? ViewBag.PageCount : (ViewBag.PageIndex + 1) }, new AjaxOptions { UpdateTargetId = "list-Representante", InsertionMode = InsertionMode.Replace })</li>
+    <li>@Ajax.ActionLink("Ultimo", "ListRepresentante", new { id = ViewBag.PageCount }, new AjaxOptions { UpdateTargetId = "list-Representante", InsertionMode = InsertionMode.Replace })</li>
+</ul>

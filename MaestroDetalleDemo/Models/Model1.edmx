@@ -1,0 +1,535 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PODER_JUDICIALModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TB_DEMANDA">
+          <Key>
+            <PropertyRef Name="NUM_DEMANDA" />
+          </Key>
+          <Property Name="NUM_DEMANDA" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="COD_DANTE" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="COD_DADO" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="FECHA_DEMANDA" Type="date" Nullable="false" />
+          <Property Name="LUG_DEMANDA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FECHA_ING" Type="date" Nullable="false" />
+          <Property Name="FECHA_CESE" Type="date" />
+          <Property Name="MOT_CESE" Type="varchar" MaxLength="100" />
+          <Property Name="CARGO" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="TIPO_REM" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ULT_REM" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_DEMANDADO">
+          <Key>
+            <PropertyRef Name="COD_DADO" />
+          </Key>
+          <Property Name="COD_DADO" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="DOM_DADO" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="COD_REPRE" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_DEMANDADO_EMPRESA">
+          <Key>
+            <PropertyRef Name="COD_DADO" />
+          </Key>
+          <Property Name="COD_DADO" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="RAZSOC_DADO" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_DEMANDADO_PERSONA">
+          <Key>
+            <PropertyRef Name="COD_DADO" />
+          </Key>
+          <Property Name="COD_DADO" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="NOM_DADO" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="APEPAT_DADO" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="APEMAT_DADO" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_DEMANDANTE">
+          <Key>
+            <PropertyRef Name="COD_DANTE" />
+          </Key>
+          <Property Name="COD_DANTE" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="NOM_DANTE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="APEPAT_DANTE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="APEMAT_DANTE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DNI_DANTE" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="DOMREAL_DANTE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DOMLEG_DANTE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="COD_REPRE" Type="char" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_DETALLE_DEMANDA">
+          <Key>
+            <PropertyRef Name="NUM_DEMANDA" />
+            <PropertyRef Name="NUM_PET" />
+          </Key>
+          <Property Name="NUM_DEMANDA" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="NUM_PET" Type="int" Nullable="false" />
+          <Property Name="MON_PET" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="DESCRIP_PET" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PRUEBA_PET" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="JUSTIF_PET" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_REPRESENTANTE">
+          <Key>
+            <PropertyRef Name="COD_REPRE" />
+          </Key>
+          <Property Name="COD_REPRE" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="NOM_REPRE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="APEPAT_REPRE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="APEMAT_REPRE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DNI_REPRE" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="DOMREAL_REPRE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DOMLEG_REPRE" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__TB_DEMAND__COD_D__412EB0B6">
+          <End Role="TB_DEMANDADO" Type="Self.TB_DEMANDADO" Multiplicity="1" />
+          <End Role="TB_DEMANDADO_PERSONA" Type="Self.TB_DEMANDADO_PERSONA" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TB_DEMANDADO">
+              <PropertyRef Name="COD_DADO" />
+            </Principal>
+            <Dependent Role="TB_DEMANDADO_PERSONA">
+              <PropertyRef Name="COD_DADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_DEMAND__COD_D__440B1D61">
+          <End Role="TB_DEMANDADO" Type="Self.TB_DEMANDADO" Multiplicity="1" />
+          <End Role="TB_DEMANDADO_EMPRESA" Type="Self.TB_DEMANDADO_EMPRESA" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TB_DEMANDADO">
+              <PropertyRef Name="COD_DADO" />
+            </Principal>
+            <Dependent Role="TB_DEMANDADO_EMPRESA">
+              <PropertyRef Name="COD_DADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_DEMAND__COD_D__46E78A0C">
+          <End Role="TB_DEMANDANTE" Type="Self.TB_DEMANDANTE" Multiplicity="1" />
+          <End Role="TB_DEMANDA" Type="Self.TB_DEMANDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_DEMANDANTE">
+              <PropertyRef Name="COD_DANTE" />
+            </Principal>
+            <Dependent Role="TB_DEMANDA">
+              <PropertyRef Name="COD_DANTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_DEMAND__COD_D__47DBAE45">
+          <End Role="TB_DEMANDADO" Type="Self.TB_DEMANDADO" Multiplicity="1" />
+          <End Role="TB_DEMANDA" Type="Self.TB_DEMANDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_DEMANDADO">
+              <PropertyRef Name="COD_DADO" />
+            </Principal>
+            <Dependent Role="TB_DEMANDA">
+              <PropertyRef Name="COD_DADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_DEMAND__COD_R__3B75D760">
+          <End Role="TB_REPRESENTANTE" Type="Self.TB_REPRESENTANTE" Multiplicity="1" />
+          <End Role="TB_DEMANDANTE" Type="Self.TB_DEMANDANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_REPRESENTANTE">
+              <PropertyRef Name="COD_REPRE" />
+            </Principal>
+            <Dependent Role="TB_DEMANDANTE">
+              <PropertyRef Name="COD_REPRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_DEMAND__COD_R__3E52440B">
+          <End Role="TB_REPRESENTANTE" Type="Self.TB_REPRESENTANTE" Multiplicity="1" />
+          <End Role="TB_DEMANDADO" Type="Self.TB_DEMANDADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_REPRESENTANTE">
+              <PropertyRef Name="COD_REPRE" />
+            </Principal>
+            <Dependent Role="TB_DEMANDADO">
+              <PropertyRef Name="COD_REPRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_DETALL__NUM_D__4AB81AF0">
+          <End Role="TB_DEMANDA" Type="Self.TB_DEMANDA" Multiplicity="1" />
+          <End Role="TB_DETALLE_DEMANDA" Type="Self.TB_DETALLE_DEMANDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_DEMANDA">
+              <PropertyRef Name="NUM_DEMANDA" />
+            </Principal>
+            <Dependent Role="TB_DETALLE_DEMANDA">
+              <PropertyRef Name="NUM_DEMANDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PODER_JUDICIALModelStoreContainer">
+          <EntitySet Name="TB_DEMANDA" EntityType="Self.TB_DEMANDA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_DEMANDADO" EntityType="Self.TB_DEMANDADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_DEMANDADO_EMPRESA" EntityType="Self.TB_DEMANDADO_EMPRESA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_DEMANDADO_PERSONA" EntityType="Self.TB_DEMANDADO_PERSONA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_DEMANDANTE" EntityType="Self.TB_DEMANDANTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_DETALLE_DEMANDA" EntityType="Self.TB_DETALLE_DEMANDA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_REPRESENTANTE" EntityType="Self.TB_REPRESENTANTE" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__TB_DEMAND__COD_D__412EB0B6" Association="Self.FK__TB_DEMAND__COD_D__412EB0B6">
+            <End Role="TB_DEMANDADO" EntitySet="TB_DEMANDADO" />
+            <End Role="TB_DEMANDADO_PERSONA" EntitySet="TB_DEMANDADO_PERSONA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_DEMAND__COD_D__440B1D61" Association="Self.FK__TB_DEMAND__COD_D__440B1D61">
+            <End Role="TB_DEMANDADO" EntitySet="TB_DEMANDADO" />
+            <End Role="TB_DEMANDADO_EMPRESA" EntitySet="TB_DEMANDADO_EMPRESA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_DEMAND__COD_D__46E78A0C" Association="Self.FK__TB_DEMAND__COD_D__46E78A0C">
+            <End Role="TB_DEMANDANTE" EntitySet="TB_DEMANDANTE" />
+            <End Role="TB_DEMANDA" EntitySet="TB_DEMANDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_DEMAND__COD_D__47DBAE45" Association="Self.FK__TB_DEMAND__COD_D__47DBAE45">
+            <End Role="TB_DEMANDADO" EntitySet="TB_DEMANDADO" />
+            <End Role="TB_DEMANDA" EntitySet="TB_DEMANDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_DEMAND__COD_R__3B75D760" Association="Self.FK__TB_DEMAND__COD_R__3B75D760">
+            <End Role="TB_REPRESENTANTE" EntitySet="TB_REPRESENTANTE" />
+            <End Role="TB_DEMANDANTE" EntitySet="TB_DEMANDANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_DEMAND__COD_R__3E52440B" Association="Self.FK__TB_DEMAND__COD_R__3E52440B">
+            <End Role="TB_REPRESENTANTE" EntitySet="TB_REPRESENTANTE" />
+            <End Role="TB_DEMANDADO" EntitySet="TB_DEMANDADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_DETALL__NUM_D__4AB81AF0" Association="Self.FK__TB_DETALL__NUM_D__4AB81AF0">
+            <End Role="TB_DEMANDA" EntitySet="TB_DEMANDA" />
+            <End Role="TB_DETALLE_DEMANDA" EntitySet="TB_DETALLE_DEMANDA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PODER_JUDICIALModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TB_DEMANDA">
+          <Key>
+            <PropertyRef Name="NUM_DEMANDA" />
+          </Key>
+          <Property Name="NUM_DEMANDA" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="COD_DANTE" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="COD_DADO" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="FECHA_DEMANDA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LUG_DEMANDA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHA_ING" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FECHA_CESE" Type="DateTime" Precision="0" />
+          <Property Name="MOT_CESE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CARGO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TIPO_REM" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ULT_REM" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="TB_DEMANDANTE" Relationship="Self.FK__TB_DEMAND__COD_D__46E78A0C" FromRole="TB_DEMANDA" ToRole="TB_DEMANDANTE" />
+          <NavigationProperty Name="TB_DEMANDADO" Relationship="Self.FK__TB_DEMAND__COD_D__47DBAE45" FromRole="TB_DEMANDA" ToRole="TB_DEMANDADO" />
+          <NavigationProperty Name="TB_DETALLE_DEMANDA" Relationship="Self.FK__TB_DETALL__NUM_D__4AB81AF0" FromRole="TB_DEMANDA" ToRole="TB_DETALLE_DEMANDA" />
+        </EntityType>
+        <EntityType Name="TB_DEMANDADO">
+          <Key>
+            <PropertyRef Name="COD_DADO" />
+          </Key>
+          <Property Name="COD_DADO" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="DOM_DADO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COD_REPRE" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TB_DEMANDA" Relationship="Self.FK__TB_DEMAND__COD_D__47DBAE45" FromRole="TB_DEMANDADO" ToRole="TB_DEMANDA" />
+          <NavigationProperty Name="TB_DEMANDADO_PERSONA" Relationship="Self.FK__TB_DEMAND__COD_D__412EB0B6" FromRole="TB_DEMANDADO" ToRole="TB_DEMANDADO_PERSONA" />
+          <NavigationProperty Name="TB_DEMANDADO_EMPRESA" Relationship="Self.FK__TB_DEMAND__COD_D__440B1D61" FromRole="TB_DEMANDADO" ToRole="TB_DEMANDADO_EMPRESA" />
+          <NavigationProperty Name="TB_REPRESENTANTE" Relationship="Self.FK__TB_DEMAND__COD_R__3E52440B" FromRole="TB_DEMANDADO" ToRole="TB_REPRESENTANTE" />
+        </EntityType>
+        <EntityType Name="TB_DEMANDADO_EMPRESA">
+          <Key>
+            <PropertyRef Name="COD_DADO" />
+          </Key>
+          <Property Name="COD_DADO" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="RAZSOC_DADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TB_DEMANDADO" Relationship="Self.FK__TB_DEMAND__COD_D__440B1D61" FromRole="TB_DEMANDADO_EMPRESA" ToRole="TB_DEMANDADO" />
+        </EntityType>
+        <EntityType Name="TB_DEMANDADO_PERSONA">
+          <Key>
+            <PropertyRef Name="COD_DADO" />
+          </Key>
+          <Property Name="COD_DADO" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NOM_DADO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APEPAT_DADO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APEMAT_DADO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TB_DEMANDADO" Relationship="Self.FK__TB_DEMAND__COD_D__412EB0B6" FromRole="TB_DEMANDADO_PERSONA" ToRole="TB_DEMANDADO" />
+        </EntityType>
+        <EntityType Name="TB_DEMANDANTE">
+          <Key>
+            <PropertyRef Name="COD_DANTE" />
+          </Key>
+          <Property Name="COD_DANTE" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NOM_DANTE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APEPAT_DANTE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APEMAT_DANTE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DNI_DANTE" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="DOMREAL_DANTE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DOMLEG_DANTE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COD_REPRE" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TB_DEMANDA" Relationship="Self.FK__TB_DEMAND__COD_D__46E78A0C" FromRole="TB_DEMANDANTE" ToRole="TB_DEMANDA" />
+          <NavigationProperty Name="TB_REPRESENTANTE" Relationship="Self.FK__TB_DEMAND__COD_R__3B75D760" FromRole="TB_DEMANDANTE" ToRole="TB_REPRESENTANTE" />
+        </EntityType>
+        <EntityType Name="TB_DETALLE_DEMANDA">
+          <Key>
+            <PropertyRef Name="NUM_DEMANDA" />
+            <PropertyRef Name="NUM_PET" />
+          </Key>
+          <Property Name="NUM_DEMANDA" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NUM_PET" Type="Int32" Nullable="false" />
+          <Property Name="MON_PET" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="DESCRIP_PET" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRUEBA_PET" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="JUSTIF_PET" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TB_DEMANDA" Relationship="Self.FK__TB_DETALL__NUM_D__4AB81AF0" FromRole="TB_DETALLE_DEMANDA" ToRole="TB_DEMANDA" />
+        </EntityType>
+        <EntityType Name="TB_REPRESENTANTE">
+          <Key>
+            <PropertyRef Name="COD_REPRE" />
+          </Key>
+          <Property Name="COD_REPRE" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NOM_REPRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APEPAT_REPRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APEMAT_REPRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DNI_REPRE" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="DOMREAL_REPRE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DOMLEG_REPRE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TB_DEMANDADO" Relationship="Self.FK__TB_DEMAND__COD_R__3E52440B" FromRole="TB_REPRESENTANTE" ToRole="TB_DEMANDADO" />
+          <NavigationProperty Name="TB_DEMANDANTE" Relationship="Self.FK__TB_DEMAND__COD_R__3B75D760" FromRole="TB_REPRESENTANTE" ToRole="TB_DEMANDANTE" />
+        </EntityType>
+        <Association Name="FK__TB_DEMAND__COD_D__46E78A0C">
+          <End Role="TB_DEMANDANTE" Type="Self.TB_DEMANDANTE" Multiplicity="1" />
+          <End Role="TB_DEMANDA" Type="Self.TB_DEMANDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_DEMANDANTE">
+              <PropertyRef Name="COD_DANTE" />
+            </Principal>
+            <Dependent Role="TB_DEMANDA">
+              <PropertyRef Name="COD_DANTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_DEMAND__COD_D__47DBAE45">
+          <End Role="TB_DEMANDADO" Type="Self.TB_DEMANDADO" Multiplicity="1" />
+          <End Role="TB_DEMANDA" Type="Self.TB_DEMANDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_DEMANDADO">
+              <PropertyRef Name="COD_DADO" />
+            </Principal>
+            <Dependent Role="TB_DEMANDA">
+              <PropertyRef Name="COD_DADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_DETALL__NUM_D__4AB81AF0">
+          <End Role="TB_DEMANDA" Type="Self.TB_DEMANDA" Multiplicity="1" />
+          <End Role="TB_DETALLE_DEMANDA" Type="Self.TB_DETALLE_DEMANDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_DEMANDA">
+              <PropertyRef Name="NUM_DEMANDA" />
+            </Principal>
+            <Dependent Role="TB_DETALLE_DEMANDA">
+              <PropertyRef Name="NUM_DEMANDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_DEMAND__COD_D__412EB0B6">
+          <End Role="TB_DEMANDADO" Type="Self.TB_DEMANDADO" Multiplicity="1" />
+          <End Role="TB_DEMANDADO_PERSONA" Type="Self.TB_DEMANDADO_PERSONA" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TB_DEMANDADO">
+              <PropertyRef Name="COD_DADO" />
+            </Principal>
+            <Dependent Role="TB_DEMANDADO_PERSONA">
+              <PropertyRef Name="COD_DADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_DEMAND__COD_D__440B1D61">
+          <End Role="TB_DEMANDADO" Type="Self.TB_DEMANDADO" Multiplicity="1" />
+          <End Role="TB_DEMANDADO_EMPRESA" Type="Self.TB_DEMANDADO_EMPRESA" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TB_DEMANDADO">
+              <PropertyRef Name="COD_DADO" />
+            </Principal>
+            <Dependent Role="TB_DEMANDADO_EMPRESA">
+              <PropertyRef Name="COD_DADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_DEMAND__COD_R__3E52440B">
+          <End Role="TB_REPRESENTANTE" Type="Self.TB_REPRESENTANTE" Multiplicity="1" />
+          <End Role="TB_DEMANDADO" Type="Self.TB_DEMANDADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_REPRESENTANTE">
+              <PropertyRef Name="COD_REPRE" />
+            </Principal>
+            <Dependent Role="TB_DEMANDADO">
+              <PropertyRef Name="COD_REPRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_DEMAND__COD_R__3B75D760">
+          <End Role="TB_REPRESENTANTE" Type="Self.TB_REPRESENTANTE" Multiplicity="1" />
+          <End Role="TB_DEMANDANTE" Type="Self.TB_DEMANDANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_REPRESENTANTE">
+              <PropertyRef Name="COD_REPRE" />
+            </Principal>
+            <Dependent Role="TB_DEMANDANTE">
+              <PropertyRef Name="COD_REPRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PODER_JUDICIALEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TB_DEMANDA" EntityType="Self.TB_DEMANDA" />
+          <EntitySet Name="TB_DEMANDADO" EntityType="Self.TB_DEMANDADO" />
+          <EntitySet Name="TB_DEMANDADO_EMPRESA" EntityType="Self.TB_DEMANDADO_EMPRESA" />
+          <EntitySet Name="TB_DEMANDADO_PERSONA" EntityType="Self.TB_DEMANDADO_PERSONA" />
+          <EntitySet Name="TB_DEMANDANTE" EntityType="Self.TB_DEMANDANTE" />
+          <EntitySet Name="TB_DETALLE_DEMANDA" EntityType="Self.TB_DETALLE_DEMANDA" />
+          <EntitySet Name="TB_REPRESENTANTE" EntityType="Self.TB_REPRESENTANTE" />
+          <AssociationSet Name="FK__TB_DEMAND__COD_D__46E78A0C" Association="Self.FK__TB_DEMAND__COD_D__46E78A0C">
+            <End Role="TB_DEMANDANTE" EntitySet="TB_DEMANDANTE" />
+            <End Role="TB_DEMANDA" EntitySet="TB_DEMANDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_DEMAND__COD_D__47DBAE45" Association="Self.FK__TB_DEMAND__COD_D__47DBAE45">
+            <End Role="TB_DEMANDADO" EntitySet="TB_DEMANDADO" />
+            <End Role="TB_DEMANDA" EntitySet="TB_DEMANDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_DETALL__NUM_D__4AB81AF0" Association="Self.FK__TB_DETALL__NUM_D__4AB81AF0">
+            <End Role="TB_DEMANDA" EntitySet="TB_DEMANDA" />
+            <End Role="TB_DETALLE_DEMANDA" EntitySet="TB_DETALLE_DEMANDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_DEMAND__COD_D__412EB0B6" Association="Self.FK__TB_DEMAND__COD_D__412EB0B6">
+            <End Role="TB_DEMANDADO" EntitySet="TB_DEMANDADO" />
+            <End Role="TB_DEMANDADO_PERSONA" EntitySet="TB_DEMANDADO_PERSONA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_DEMAND__COD_D__440B1D61" Association="Self.FK__TB_DEMAND__COD_D__440B1D61">
+            <End Role="TB_DEMANDADO" EntitySet="TB_DEMANDADO" />
+            <End Role="TB_DEMANDADO_EMPRESA" EntitySet="TB_DEMANDADO_EMPRESA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_DEMAND__COD_R__3E52440B" Association="Self.FK__TB_DEMAND__COD_R__3E52440B">
+            <End Role="TB_REPRESENTANTE" EntitySet="TB_REPRESENTANTE" />
+            <End Role="TB_DEMANDADO" EntitySet="TB_DEMANDADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_DEMAND__COD_R__3B75D760" Association="Self.FK__TB_DEMAND__COD_R__3B75D760">
+            <End Role="TB_REPRESENTANTE" EntitySet="TB_REPRESENTANTE" />
+            <End Role="TB_DEMANDANTE" EntitySet="TB_DEMANDANTE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PODER_JUDICIALModelStoreContainer" CdmEntityContainer="PODER_JUDICIALEntities">
+          <EntitySetMapping Name="TB_DEMANDA">
+            <EntityTypeMapping TypeName="PODER_JUDICIALModel.TB_DEMANDA">
+              <MappingFragment StoreEntitySet="TB_DEMANDA">
+                <ScalarProperty Name="NUM_DEMANDA" ColumnName="NUM_DEMANDA" />
+                <ScalarProperty Name="COD_DANTE" ColumnName="COD_DANTE" />
+                <ScalarProperty Name="COD_DADO" ColumnName="COD_DADO" />
+                <ScalarProperty Name="FECHA_DEMANDA" ColumnName="FECHA_DEMANDA" />
+                <ScalarProperty Name="LUG_DEMANDA" ColumnName="LUG_DEMANDA" />
+                <ScalarProperty Name="FECHA_ING" ColumnName="FECHA_ING" />
+                <ScalarProperty Name="FECHA_CESE" ColumnName="FECHA_CESE" />
+                <ScalarProperty Name="MOT_CESE" ColumnName="MOT_CESE" />
+                <ScalarProperty Name="CARGO" ColumnName="CARGO" />
+                <ScalarProperty Name="TIPO_REM" ColumnName="TIPO_REM" />
+                <ScalarProperty Name="ULT_REM" ColumnName="ULT_REM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_DEMANDADO">
+            <EntityTypeMapping TypeName="PODER_JUDICIALModel.TB_DEMANDADO">
+              <MappingFragment StoreEntitySet="TB_DEMANDADO">
+                <ScalarProperty Name="COD_DADO" ColumnName="COD_DADO" />
+                <ScalarProperty Name="DOM_DADO" ColumnName="DOM_DADO" />
+                <ScalarProperty Name="COD_REPRE" ColumnName="COD_REPRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_DEMANDADO_EMPRESA">
+            <EntityTypeMapping TypeName="PODER_JUDICIALModel.TB_DEMANDADO_EMPRESA">
+              <MappingFragment StoreEntitySet="TB_DEMANDADO_EMPRESA">
+                <ScalarProperty Name="COD_DADO" ColumnName="COD_DADO" />
+                <ScalarProperty Name="RAZSOC_DADO" ColumnName="RAZSOC_DADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_DEMANDADO_PERSONA">
+            <EntityTypeMapping TypeName="PODER_JUDICIALModel.TB_DEMANDADO_PERSONA">
+              <MappingFragment StoreEntitySet="TB_DEMANDADO_PERSONA">
+                <ScalarProperty Name="COD_DADO" ColumnName="COD_DADO" />
+                <ScalarProperty Name="NOM_DADO" ColumnName="NOM_DADO" />
+                <ScalarProperty Name="APEPAT_DADO" ColumnName="APEPAT_DADO" />
+                <ScalarProperty Name="APEMAT_DADO" ColumnName="APEMAT_DADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_DEMANDANTE">
+            <EntityTypeMapping TypeName="PODER_JUDICIALModel.TB_DEMANDANTE">
+              <MappingFragment StoreEntitySet="TB_DEMANDANTE">
+                <ScalarProperty Name="COD_DANTE" ColumnName="COD_DANTE" />
+                <ScalarProperty Name="NOM_DANTE" ColumnName="NOM_DANTE" />
+                <ScalarProperty Name="APEPAT_DANTE" ColumnName="APEPAT_DANTE" />
+                <ScalarProperty Name="APEMAT_DANTE" ColumnName="APEMAT_DANTE" />
+                <ScalarProperty Name="DNI_DANTE" ColumnName="DNI_DANTE" />
+                <ScalarProperty Name="DOMREAL_DANTE" ColumnName="DOMREAL_DANTE" />
+                <ScalarProperty Name="DOMLEG_DANTE" ColumnName="DOMLEG_DANTE" />
+                <ScalarProperty Name="COD_REPRE" ColumnName="COD_REPRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_DETALLE_DEMANDA">
+            <EntityTypeMapping TypeName="PODER_JUDICIALModel.TB_DETALLE_DEMANDA">
+              <MappingFragment StoreEntitySet="TB_DETALLE_DEMANDA">
+                <ScalarProperty Name="NUM_DEMANDA" ColumnName="NUM_DEMANDA" />
+                <ScalarProperty Name="NUM_PET" ColumnName="NUM_PET" />
+                <ScalarProperty Name="MON_PET" ColumnName="MON_PET" />
+                <ScalarProperty Name="DESCRIP_PET" ColumnName="DESCRIP_PET" />
+                <ScalarProperty Name="PRUEBA_PET" ColumnName="PRUEBA_PET" />
+                <ScalarProperty Name="JUSTIF_PET" ColumnName="JUSTIF_PET" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_REPRESENTANTE">
+            <EntityTypeMapping TypeName="PODER_JUDICIALModel.TB_REPRESENTANTE">
+              <MappingFragment StoreEntitySet="TB_REPRESENTANTE">
+                <ScalarProperty Name="COD_REPRE" ColumnName="COD_REPRE" />
+                <ScalarProperty Name="NOM_REPRE" ColumnName="NOM_REPRE" />
+                <ScalarProperty Name="APEPAT_REPRE" ColumnName="APEPAT_REPRE" />
+                <ScalarProperty Name="APEMAT_REPRE" ColumnName="APEMAT_REPRE" />
+                <ScalarProperty Name="DNI_REPRE" ColumnName="DNI_REPRE" />
+                <ScalarProperty Name="DOMREAL_REPRE" ColumnName="DOMREAL_REPRE" />
+                <ScalarProperty Name="DOMLEG_REPRE" ColumnName="DOMLEG_REPRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

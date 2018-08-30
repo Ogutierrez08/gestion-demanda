@@ -1,0 +1,98 @@
+﻿@model IEnumerable<MaestroDetalleDemo.Models.TB_DEMANDA>
+
+<h2>Demanda</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NUM_DEMANDA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COD_DANTE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COD_DADO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FECHA_DEMANDA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LUG_DEMANDA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FECHA_ING)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FECHA_CESE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MOT_CESE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CARGO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TIPO_REM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ULT_REM)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NUM_DEMANDA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.COD_DANTE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.COD_DADO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FECHA_DEMANDA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LUG_DEMANDA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FECHA_ING)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FECHA_CESE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MOT_CESE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CARGO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TIPO_REM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ULT_REM)
+            </td>
+
+            <td>
+                @Ajax.ActionLink("Detalle Demanda", "Detalle", "Demanda", new { id = item.NUM_DEMANDA }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "detalle" })
+            </td>
+        </tr>
+    }
+
+</table>
+<ul class="pagination">
+    <li>@Ajax.ActionLink("Primero", "ListDemanda", new { id = 1 }, new AjaxOptions { UpdateTargetId = "list-Demanda", InsertionMode = InsertionMode.Replace })</li>
+    <li>@Ajax.ActionLink("Anterior", "ListDemanda", new { id = (ViewBag.PageIndex - 1 < 1) ? 1 : (ViewBag.PageIndex - 1) }, new AjaxOptions { UpdateTargetId = "list-Demanda", InsertionMode = InsertionMode.Replace })</li>
+    <li><span>Pág. @ViewBag.PageIndex de @ViewBag.PageCount</span></li>
+    <li>@Ajax.ActionLink("Siguiente", "ListDemanda", new { id = (ViewBag.PageIndex + 1 > ViewBag.PageCount) ? ViewBag.PageCount : (ViewBag.PageIndex + 1) }, new AjaxOptions { UpdateTargetId = "list-Demanda", InsertionMode = InsertionMode.Replace })</li>
+    <li>@Ajax.ActionLink("Ultimo", "ListDemanda", new { id = ViewBag.PageCount }, new AjaxOptions { UpdateTargetId = "list-Demanda", InsertionMode = InsertionMode.Replace })</li>
+</ul>
+<p>
+    Detalle de Demanda
+</p>
+<div id="detalle"></div>
+

@@ -1,0 +1,81 @@
+﻿@model MaestroDetalleDemo.Models.TB_DEMANDADO_EMPRESA
+@{ Layout = "~/Views/Shared/_LayoutPageModal.cshtml";}
+@using (Ajax.BeginForm("registrarDetalle1", "Demandado", new AjaxOptions
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "span",
+
+}))
+{
+    <br />
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Registrando Empresa</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.COD_DADO, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.COD_DADO, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.COD_DADO, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RAZSOC_DADO, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RAZSOC_DADO, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RAZSOC_DADO, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+                @*<button type="button" class="btn btn-primary" onclick="llamarDetalle2();" data-toggle="modal" data-target="#myModal">
+                    Continuar
+                </button>*@
+            </div>
+        </div>
+        <span id="span"></span>
+    </div>
+
+    @*<div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                 Modal content
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Registrando Demanda</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="resultado"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+    @*<script>
+           function llamarDetalle2() {
+               $('#myModal').modal('hide');
+            var laURLDeLaVista = '@Url.Action("registrarDetalle2", "Demandado")';
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "GET",
+                url: laURLDeLaVista,
+                data: {},
+                success: function (response) {
+                    $('#resultado').html('');
+                    $('#resultado').html(response);
+                }
+            });
+        }
+            </script>*@
+}
+
+

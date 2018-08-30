@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MaestroDetalleDemo.Models.TB_DEMANDADO_PERSONA>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.COD_DADO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NOM_DADO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.APEPAT_DADO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.APEMAT_DADO)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.COD_DADO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOM_DADO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.APEPAT_DADO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.APEMAT_DADO)
+        </td>
+        
+    </tr>
+}
+
+</table>

@@ -1,0 +1,354 @@
+﻿@{ Layout = null;}
+
+
+<link href="~/Content/styles/demo_style.css" rel="stylesheet" type="text/css">
+
+<link href="~/Content/styles/smart_wizard_vertical.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="~/Content/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="~/Content/js/jquery.smartWizard.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        // Smart Wizard
+        $('#wizard').smartWizard({ transitionEffect: 'slide' });
+
+    });
+</script>
+
+<table align="center" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <h2>Registro de demanda</h2>
+            <!-- Tabs -->
+            <div id="wizard" class="swMain">
+                <ul>
+                    <li>
+                        <a href="#step-1">
+                            <label class="stepNumber">1</label>
+                            <span class="stepDesc">
+                                Paso 1<br />
+                                <small>Ingresa Demandado</small>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-2">
+                            <label class="stepNumber">2</label>
+                            <span class="stepDesc">
+                                Paso 2<br />
+                                <small>Ingresa Empresa</small>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-3">
+                            <label class="stepNumber">3</label>
+                            <span class="stepDesc">
+                                Paso 3<br />
+                                <small>Ingresa Persona</small>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-4">
+                            <label class="stepNumber">4</label>
+                            <span class="stepDesc">
+                                Paso 4<br />
+                                <small>Ingresa Demandante</small>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-5">
+                            <label class="stepNumber">5</label>
+                            <span class="stepDesc">
+                                Paso 5<br />
+                                <small>Ingresa Demanda</small>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-6">
+                            <label class="stepNumber">6</label>
+                            <span class="stepDesc">
+                                Paso 6<br />
+                                <small>Ingresa Demanda Detalle</small>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+                <div id="step-1">
+                    <p>En esta seccion registrar a la persona acusada, sea conciso en los datos que va ingresar</p>
+                    <br />
+                    <p>Si esta listo para hacerlo porfavor pulse el boton para desplegar la ventana: </p>
+                    <button type="button" class="btn btn-primary" onclick="llamarDemandado();" data-toggle="modal" data-target="#myModalD" ">
+                        Registrar Demandado
+                    </button>
+                </div>
+                <div id="step-2">
+                    <p>En esta seccion registrar a la empresa para la cual el acusado trabaja, sea conciso en los datos que va ingresar</p>
+                    <br />
+                    <p>Si esta listo para hacerlo porfavor pulse el boton para desplegar la ventana: </p>
+                    <button type="button" class="btn btn-primary" onclick="llamarDetalle1();" data-toggle="modal" data-target="#myModal">
+                        Registrar Empresa
+                    </button>
+                </div>
+                <div id="step-3">
+                    <p>En esta seccion registrar a la persona acusada, sea conciso en los datos que va ingresar</p>
+                    <br />
+                    <p>Si esta listo para hacerlo porfavor pulse el boton para desplegar la ventana: </p>
+                    <button type="button" id="btnDetalle1" class="btn btn-primary" onclick="llamarDetalle2();" data-toggle="modal" data-target="#myModal_2">
+                        Registrar Persona
+                    </button>
+                </div>
+                <div id="step-4">
+                    <p>En esta seccion registrar a la persona que va instaurar la demanda, sea conciso en los datos que va ingresar</p>
+                    <br />
+                    <p>Si esta listo para hacerlo porfavor pulse el boton para desplegar la ventana: </p>
+                    <button type="button" class="btn btn-primary" onclick="llamarDemandante();" data-toggle="modal" data-target="#myModal_4">
+                        Registrar Demandante
+                    </button>
+                </div>
+
+                <div id="step-5">
+                    <p>En esta seccion registrar los datos generales de la demanda, sea conciso en los datos que va ingresar</p>
+                    <br />
+                    <p>Si esta listo para hacerlo porfavor pulse el boton para desplegar la ventana: </p>
+                    <button type="button" class="btn btn-primary" onclick="llamarDemanda();" data-toggle="modal" data-target="#myModal_3">
+                        Registrar Demanda
+                    </button>
+                </div>
+                <div id="step-6">
+                    <p>En esta seccion registrar los datos particulares de la demanda, sea conciso en los datos que va ingresar</p>
+                    <br />
+                    <p>Si esta listo para hacerlo porfavor pulse el boton para desplegar la ventana: </p>
+                    <button type="button" class="btn btn-primary" onclick="llamarDemandaDetalle();" data-toggle="modal" data-target="#myModal_5">
+                        Registrar Demanda Detalle
+                    </button>
+                </div>
+            </div>
+
+            <!-- End SmartWizard Content -->
+
+        </td>
+    </tr>
+</table>
+
+
+
+<div class="modal fade" id="myModalD" role="dialog">
+    <div class="modal-dialog">
+        Modal content
+        <div class="modal-content">
+            @*<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Registrando Demanda</h4>
+                </div>*@
+            <div class="modal-body">
+                <div id="resultadoD"></div>
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        Modal content
+        <div class="modal-content">
+            @*<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Registrando Demanda</h4>
+                </div>*@
+            <div class="modal-body">
+                <div id="resultado"></div>
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal_2" role="dialog">
+    <div class="modal-dialog">
+        Modal content
+        <div class="modal-content">
+            @*<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Registrando Demanda</h4>
+                </div>*@
+            <div class="modal-body">
+                <div id="resultado2"></div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal_3" role="dialog">
+    <div class="modal-dialog">
+        Modal content
+        <div class="modal-content">
+            @*<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Registrando Demanda</h4>
+                </div>*@
+            <div class="modal-body">
+                <div id="resultado3"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal_4" role="dialog">
+    <div class="modal-dialog">
+        Modal content
+        <div class="modal-content">
+            @*<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Registrando Demanda</h4>
+                </div>*@
+            <div class="modal-body">
+                <div id="resultado4"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal_5" role="dialog">
+    <div class="modal-dialog">
+        Modal content
+        <div class="modal-content">
+            @*<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Registrando Demanda</h4>
+                </div>*@
+            <div class="modal-body">
+                <div id="resultado5"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+       function llamarDemandado() {
+
+    var laURLDeLaVista = '@Url.Action("registrarCabezera", "Demandado")';
+    $.ajax({
+        cache: false,
+        async: true,
+        type: "GET",
+        url: laURLDeLaVista,
+        data: {},
+        success: function (response) {
+            $('#resultadoD').html('');
+            $('#resultadoD').html(response);
+        }
+            });
+    }
+
+        function llamarDetalle1() {
+
+    var laURLDeLaVista = '@Url.Action("registrarDetalle1", "Demandado")';
+    $.ajax({
+        cache: false,
+        async: true,
+        type: "GET",
+        url: laURLDeLaVista,
+        data: {},
+        success: function (response) {
+            $('#resultado').html('');
+            $('#resultado').html(response);
+        }
+            });
+        }
+
+
+
+        function llamarDetalle2() {
+
+
+    var laURLDeLaVista = '@Url.Action("registrarDetalle2", "Demandado")';
+    $.ajax({
+        cache: false,
+        async: true,
+        type: "GET",
+        url: laURLDeLaVista,
+        data: {},
+        success: function (response) {
+            $('#resultado2').html('');
+            $('#resultado2').html(response);
+        }
+    });
+        }
+
+        function llamarDemanda() {
+
+    var laURLDeLaVista = '@Url.Action("registrar", "Demanda")';
+    $.ajax({
+        cache: false,
+        async: true,
+        type: "GET",
+        url: laURLDeLaVista,
+        data: {},
+        success: function (response) {
+            $('#resultado3').html('');
+            $('#resultado3').html(response);
+        }
+    });
+    }
+
+    function llamarDemandante() {
+
+    var laURLDeLaVista = '@Url.Action("registrarDemandante", "Demandante")';
+    $.ajax({
+        cache: false,
+        async: true,
+        type: "GET",
+        url: laURLDeLaVista,
+        data: {},
+        success: function (response) {
+            $('#resultado4').html('');
+            $('#resultado4').html(response);
+        }
+    });
+    }
+
+    function llamarDemandaDetalle() {
+
+    var laURLDeLaVista = '@Url.Action("registrarDetalle", "Demanda")';
+    $.ajax({
+        cache: false,
+        async: true,
+        type: "GET",
+        url: laURLDeLaVista,
+        data: {},
+        success: function (response) {
+            $('#resultado5').html('');
+            $('#resultado5').html(response);
+        }
+    });
+        }
+
+</script>

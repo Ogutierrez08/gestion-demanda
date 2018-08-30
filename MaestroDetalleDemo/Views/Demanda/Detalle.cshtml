@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MaestroDetalleDemo.Models.TB_DETALLE_DEMANDA>
+
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NUM_DEMANDA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NUM_PET)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MON_PET)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIP_PET)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRUEBA_PET)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JUSTIF_PET)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NUM_DEMANDA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NUM_PET)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MON_PET)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCRIP_PET)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRUEBA_PET)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JUSTIF_PET)
+        </td>
+        <td>
+        </td>
+    </tr>
+}
+
+</table>

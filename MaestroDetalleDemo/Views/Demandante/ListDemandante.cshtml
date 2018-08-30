@@ -1,0 +1,71 @@
+﻿@model IEnumerable<MaestroDetalleDemo.Models.TB_DEMANDANTE>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.COD_DANTE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NOM_DANTE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.APEPAT_DANTE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.APEMAT_DANTE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DNI_DANTE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOMREAL_DANTE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOMLEG_DANTE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COD_REPRE)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.COD_DANTE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOM_DANTE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.APEPAT_DANTE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.APEMAT_DANTE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DNI_DANTE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DOMREAL_DANTE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DOMLEG_DANTE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.COD_REPRE)
+        </td>
+       
+    </tr>
+}
+
+</table>
+
+<ul class="pagination">
+    <li>@Ajax.ActionLink("Primero", "ListDemandante", new { id = 1 }, new AjaxOptions { UpdateTargetId = "list-Demandante", InsertionMode = InsertionMode.Replace })</li>
+    <li>@Ajax.ActionLink("Anterior", "ListDemandante", new { id = (ViewBag.PageIndex - 1 < 1) ? 1 : (ViewBag.PageIndex - 1) }, new AjaxOptions { UpdateTargetId = "list-Demandante", InsertionMode = InsertionMode.Replace })</li>
+    <li><span>Pág. @ViewBag.PageIndex de @ViewBag.PageCount</span></li>
+    <li>@Ajax.ActionLink("Siguiente", "ListDemandante", new { id = (ViewBag.PageIndex + 1 > ViewBag.PageCount) ? ViewBag.PageCount : (ViewBag.PageIndex + 1) }, new AjaxOptions { UpdateTargetId = "list-Demandante", InsertionMode = InsertionMode.Replace })</li>
+    <li>@Ajax.ActionLink("Ultimo", "ListDemandante", new { id = ViewBag.PageCount }, new AjaxOptions { UpdateTargetId = "list-Demandante", InsertionMode = InsertionMode.Replace })</li>
+</ul>

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MaestroDetalleDemo.Models.TB_DEMANDADO_EMPRESA>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.COD_DADO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RAZSOC_DADO)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.COD_DADO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RAZSOC_DADO)
+            </td>
+            <td>
+                @Ajax.ActionLink("Detalle Persona", "Detalle2", "Demandado", new { id = item.COD_DADO }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "detalleDemandado2" })
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    Detalle de Persona
+</p>
+<div id="detalleDemandado2"></div>

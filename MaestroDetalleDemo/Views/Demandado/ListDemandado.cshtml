@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MaestroDetalleDemo.Models.TB_DEMANDADO>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.COD_DADO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOM_DADO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COD_REPRE)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.COD_DADO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOM_DADO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.COD_REPRE)
+            </td>
+            <td>
+                @Ajax.ActionLink("Detalle Demandado", "Detalle", "Demandado", new { id = item.COD_DADO }, new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "detalleDemandado" })
+            </td>
+        </tr>
+    }
+
+</table>
+<ul class="pagination">
+    <li>@Ajax.ActionLink("Primero", "ListDemandado", new { id = 1 }, new AjaxOptions { UpdateTargetId = "list-Demandado", InsertionMode = InsertionMode.Replace })</li>
+    <li>@Ajax.ActionLink("Anterior", "ListDemandado", new { id = (ViewBag.PageIndex - 1 < 1) ? 1 : (ViewBag.PageIndex - 1) }, new AjaxOptions { UpdateTargetId = "list-Demandado", InsertionMode = InsertionMode.Replace })</li>
+    <li><span>Pág. @ViewBag.PageIndex de @ViewBag.PageCount</span></li>
+    <li>@Ajax.ActionLink("Siguiente", "ListDemandado", new { id = (ViewBag.PageIndex + 1 > ViewBag.PageCount) ? ViewBag.PageCount : (ViewBag.PageIndex + 1) }, new AjaxOptions { UpdateTargetId = "list-Demandado", InsertionMode = InsertionMode.Replace })</li>
+    <li>@Ajax.ActionLink("Ultimo", "ListDemandado", new { id = ViewBag.PageCount }, new AjaxOptions { UpdateTargetId = "list-Demandado", InsertionMode = InsertionMode.Replace })</li>
+</ul>
+<p>
+    Detalle Empresa
+</p>
+<div id="detalleDemandado"></div>
